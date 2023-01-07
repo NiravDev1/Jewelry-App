@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.jewerlyadmin.Customer.CustomerListFragmentC;
 import com.example.jewerlyadmin.ProductsList.ProductsListFragmentP;
+import com.example.jewerlyadmin.SellerList.SellerListFragmentS;
 import com.example.jewerlyadmin.SellerReq.SellerRequestFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;

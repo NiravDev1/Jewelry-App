@@ -7,15 +7,25 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.loginsql.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -72,15 +82,6 @@ public class BecomeSellerActivity extends AppCompatActivity {
                 String SellerAddress = sellleraddress.getEditText().getText().toString();
 
 
-                String datetime = null;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    LocalDateTime localDateTime = LocalDateTime.now();
-                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                    datetime = localDateTime.format(dateTimeFormatter);
-
-                }
-
-
                 if (SellerName.isEmpty() || SellerEmail.isEmpty() || SellerMobile.isEmpty() || SellerBusinessname.isEmpty() || SellerAddress.isEmpty()) {
                     Toast.makeText(BecomeSellerActivity.this, "fill the fields", Toast.LENGTH_SHORT).show();
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(SellerEmail).matches()) {
@@ -90,38 +91,74 @@ public class BecomeSellerActivity extends AppCompatActivity {
 
                     Toast.makeText(BecomeSellerActivity.this, "Select Gender", Toast.LENGTH_SHORT).show();
                 } else {
-                    ///check old user email
-                    selleremail.setError(null);
-                    selleremail.setErrorEnabled(false);
 
-                    String sellerRequId = databaseReference.child("Admin").child("SEllerRequest").push().getKey();
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("SellerName", SellerName);
-                    map.put("SellerEmail", SellerEmail);
-                    map.put("SellerMobileNo", SellerMobile);
-                    map.put("SellerGender", SellerGender);
-                    map.put("SellerBusinessName", SellerBusinessname);
-                    map.put("SellerAddress", SellerAddress);
-                    map.put("SellerAddDate", datetime);
-                    map.put("SellerRequestId",sellerRequId);
 
-                    databaseReference.child("Admin").child("SellerRequest").child(sellerRequId).setValue(map);
 
-                    AlertDialog.Builder builder =new AlertDialog.Builder(BecomeSellerActivity.this);
-                    builder.setTitle("Successfully");
-                    builder.setIcon(R.drawable.success);
-                    builder.setMessage("\nYour Request ID "+sellerRequId+"\n\n\nYour request has been received and \nwe will verify your data and send the password to your email within 24 hours");
-                    builder.setCancelable(true);
-                    builder.show();
+                        Query query=databaseReference.child("Admin").child("SellerRequest").orderByChild("SellerEmail").equalTo(SellerEmail);
+                               query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                   @Override
+                                   public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                       if (snapshot.exists())
+                                       {
+                                           selleremail.setError("This Email is already Taken ,Try Another Email");
+                                       }
+                                       else
+                                       {
+                                           SendRequest();
+                                       }
+                                   }
 
-                    selleremail.getEditText().setText(null);
-                    sellename.getEditText().setText(null);
-                    sellermobile.getEditText().setText(null);
-                    sellerbusinesname.getEditText().setText(null);
-                    sellleraddress.getEditText().setText(null);
+                                   @Override
+                                   public void onCancelled(@NonNull DatabaseError error) {
+                                       Toast.makeText(BecomeSellerActivity.this, "Error::"+error.getMessage(), Toast.LENGTH_SHORT).show();
+                                   }
+                               });
+
 
 
                 }
+
+            }
+
+            private void SendRequest() {
+
+                selleremail.setError(null);
+                selleremail.setErrorEnabled(false);
+                String datetime = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    LocalDateTime localDateTime = LocalDateTime.now();
+                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                    datetime = localDateTime.format(dateTimeFormatter);
+
+                }
+
+                String sellerRequId = databaseReference.child("Admin").child("SEllerRequest").push().getKey();
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("SellerName", sellename.getEditText().getText().toString());
+                map.put("SellerEmail", selleremail.getEditText().getText().toString());
+                map.put("SellerMobileNo", sellermobile.getEditText().getText().toString());
+                map.put("SellerGender", SellerGender);
+                map.put("SellerBusinessName", sellerbusinesname.getEditText().getText().toString());
+                map.put("SellerAddress", sellleraddress.getEditText().getText().toString());
+                map.put("SellerAddDate", datetime);
+                map.put("SellerRequestId", sellerRequId);
+
+
+                databaseReference.child("Admin").child("SellerRequest").child(sellerRequId).setValue(map);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(BecomeSellerActivity.this);
+                builder.setTitle("Successfully");
+                builder.setIcon(R.drawable.success);
+                builder.setMessage("\nYour Request ID " + sellerRequId + "\n\n\nYour request has been received and \nwe will verify your data and send the password link to your email within 24 hours");
+                builder.setCancelable(true);
+                builder.show();
+
+                selleremail.getEditText().setText(null);
+                sellename.getEditText().setText(null);
+                sellermobile.getEditText().setText(null);
+                sellerbusinesname.getEditText().setText(null);
+                sellleraddress.getEditText().setText(null);
+
 
             }
         });

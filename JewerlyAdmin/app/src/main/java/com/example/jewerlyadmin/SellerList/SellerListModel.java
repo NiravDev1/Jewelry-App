@@ -1,9 +1,9 @@
-package com.example.jewerlyadmin.SellerReq;
+package com.example.jewerlyadmin.SellerList;
 
-public class SellerRequestModel {
-    private String SellerAddDate, SellerAddress, SellerBusinessName, SellerEmail, SellerGender, SellerMobileNo, SellerName, SellerRequestId,SellerId;
+public class SellerListModel {
+    private String SellerAddDate, SellerAddress, SellerBusinessName, SellerEmail, SellerGender, SellerMobileNo, SellerName, SellerId;
 
-    public SellerRequestModel(String sellerAddDate, String sellerAddress, String sellerBusinessName, String sellerEmail, String sellerGender, String sellerMobileNo, String sellerName, String sellerId) {
+    public SellerListModel(String sellerAddDate, String sellerAddress, String sellerBusinessName, String sellerEmail, String sellerGender, String sellerMobileNo, String sellerName, String sellerId) {
         SellerAddDate = sellerAddDate;
         SellerAddress = sellerAddress;
         SellerBusinessName = sellerBusinessName;
@@ -14,7 +14,7 @@ public class SellerRequestModel {
         SellerId = sellerId;
     }
 
-    public SellerRequestModel() {
+    public SellerListModel() {
     }
 
     public String getSellerAddDate() {
@@ -73,14 +73,6 @@ public class SellerRequestModel {
         SellerName = sellerName;
     }
 
-    public String getSellerRequestId() {
-        return SellerRequestId;
-    }
-
-    public void setSellerRequestId(String sellerRequestId) {
-        SellerRequestId = sellerRequestId;
-    }
-
     public String getSellerId() {
         return SellerId;
     }
@@ -89,3 +81,4 @@ public class SellerRequestModel {
         SellerId = sellerId;
     }
 }
+

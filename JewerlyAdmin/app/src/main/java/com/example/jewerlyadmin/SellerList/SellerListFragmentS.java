@@ -1,12 +1,17 @@
-package com.example.jewerlyadmin;
+package com.example.jewerlyadmin.SellerList;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.jewerlyadmin.R;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +60,38 @@ public class SellerListFragmentS extends Fragment {
         }
     }
 
+    RecyclerView sellerlistrecycler;
+    SellerListAdapter sellerListAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_seller_list_s, container, false);
+        View view = inflater.inflate(R.layout.fragment_seller_list_s, container, false);
+
+        sellerlistrecycler = view.findViewById(R.id.seller_list_recycler_View_id);
+        sellerlistrecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        FirebaseRecyclerOptions<SellerListModel> options = new FirebaseRecyclerOptions.Builder<SellerListModel>()
+                .setQuery(FirebaseDatabase.getInstance().getReference("User").child("Seller"), SellerListModel.class)
+                .build();
+
+        sellerListAdapter = new SellerListAdapter(options);
+        sellerlistrecycler.setAdapter(sellerListAdapter);
+
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        sellerListAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        sellerListAdapter.stopListening();
     }
 }

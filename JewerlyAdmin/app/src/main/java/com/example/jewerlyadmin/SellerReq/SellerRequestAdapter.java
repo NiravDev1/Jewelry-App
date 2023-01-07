@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -86,18 +87,18 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
         });
 
 
-        holder.down_arrow.setOnClickListener(new View.OnClickListener() {
+        holder.sellerReqdown_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.expadablelayout.setVisibility(View.VISIBLE);
-                holder.down_arrow.setVisibility(View.GONE);
+                holder.sellerReqdown_arrow.setVisibility(View.GONE);
             }
         });
-        holder.up_arrow.setOnClickListener(new View.OnClickListener() {
+        holder.selerRequp_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.expadablelayout.setVisibility(View.GONE);
-                holder.down_arrow.setVisibility(View.VISIBLE);
+                holder.sellerReqdown_arrow.setVisibility(View.VISIBLE);
             }
         });
 
@@ -109,7 +110,7 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
                 Passwordgenerat(6);
                 String Password = Passwordgenerat(6).toString();
-                SellerRequestModel sellerRequestModel = new SellerRequestModel(holder.selleremail.getText().toString(), holder.selleraddress.getText().toString(), holder.sellerbname.getText().toString(), holder.selleremail.getText().toString(), holder.sellergender.getText().toString(), holder.sellercontect.getText().toString(), holder.sellername.getText().toString(), holder.sellerreqid.getText().toString());
+
                 auth.createUserWithEmailAndPassword(holder.selleremail.getText().toString(), Password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -117,6 +118,9 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
                                 if (task.isSuccessful()) {
                                     Toast.makeText(v.getContext(), "auth done", Toast.LENGTH_SHORT).show();
 
+                                    String  sellerId=  auth.getCurrentUser().getUid();
+                                    System.out.println(sellerId);
+                                    SellerRequestModel sellerRequestModel = new SellerRequestModel( holder.selleradddatetime.getText().toString(),holder.selleraddress.getText().toString(), holder.sellerbname.getText().toString(), holder.selleremail.getText().toString(), holder.sellergender.getText().toString(), holder.sellercontect.getText().toString(), holder.sellername.getText().toString().toString(),sellerId);
                                     reference.child("User").child("Seller").child(auth.getCurrentUser().getUid()).setValue(sellerRequestModel);
                                     Toast.makeText(v.getContext(), "database done", Toast.LENGTH_SHORT).show();
                                     sendlinkEmail();
@@ -187,7 +191,7 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
     public static class SellerReqViewholder extends RecyclerView.ViewHolder { ///viewholder class
 
         TextView sellerreqid, sellername, selleremail, sellergender, sellercontect, selleraddress, sellerbname, selleradddatetime;
-        ImageView up_arrow, down_arrow;
+        ImageView selerRequp_arrow, sellerReqdown_arrow;
         LinearLayout expadablelayout;
         Button approveBtn, deleteBtn;
         CardView sellerreqcard;
@@ -202,8 +206,8 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
             selleraddress = itemView.findViewById(R.id.seller_req_address_c_id);
             sellerbname = itemView.findViewById(R.id.seller_req_bname_c_id);
             selleradddatetime = itemView.findViewById(R.id.seller_req_adddattime_c_id);
-            up_arrow = itemView.findViewById(R.id.up_arrow_single_card_id);
-            down_arrow = itemView.findViewById(R.id.down_arrow_single_card_id);
+            selerRequp_arrow = itemView.findViewById(R.id.up_arrow_sellerReq_single_card_id);
+            sellerReqdown_arrow = itemView.findViewById(R.id.down_arrow_SellerREq_single_card_id);
 
             approveBtn = itemView.findViewById(R.id.approve_Req_seller_c_id);
             deleteBtn = itemView.findViewById(R.id.delete_Req_seller_c_id);
