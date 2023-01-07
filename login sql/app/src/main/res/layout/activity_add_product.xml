@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    android:orientation="vertical"
+    tools:context=".SellerDashbord.AddProductActivity">
+
+    <TextView
+        android:id="@+id/add_product_seller_name_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seller Name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        />
+
+
+    <ScrollView
+        android:layout_below="@id/add_product_seller_name_id"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="25sp"
+            >
+
+
+            <ImageView
+                android:id="@+id/image_picker_id"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="168dp"
+                android:layout_marginEnd="143dp"
+                android:src="@drawable/ic_baseline_camera_alt_24" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/image_picker_id"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/seller_add_product_name_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:autofillHints=""
+                    android:hint="Product Name"
+                    android:inputType="text"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/seller_add_product_price_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Product Price "
+                    android:inputType="number"
+                    android:textColorHint="#78909C"
+                    android:textSize="20sp" />
+
+
+                <EditText
+                    android:id="@+id/seller_add_product_discount_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:hint="Product Discount"
+                    android:inputType="number"
+                    android:maxLength="100"
+                    android:textColorHint="#78909C"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/seller_add_product_quantity_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:hint="Product quantity"
+                    android:inputType="number"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/seller_add_product_details_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:hint="Product Details"
+                    android:inputType="text"
+                    android:lines="3"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/seller_add_upload_btn_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="50dp"
+                    android:paddingVertical="15dp"
+                    android:text="upload" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

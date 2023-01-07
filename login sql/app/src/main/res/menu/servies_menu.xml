@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/sbuy_id"
+        android:title="Buy Gold"
+        android:icon="@drawable/buy_gold"
+        />
+    <item android:id="@+id/sell_id"
+        android:title="Selling Gold"
+        android:icon="@drawable/selling_gold"
+        />
+    <item android:id="@+id/point_id"
+        android:title="Point"
+        android:icon="@drawable/point"
+        />
+
+    <item android:id="@+id/deposite_id"
+        android:title="Deposite"
+        android:icon="@drawable/deposit"
+        />
+
+
+
+</menu>

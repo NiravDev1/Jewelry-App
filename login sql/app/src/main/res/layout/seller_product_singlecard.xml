@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="20dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/product_image_c_S_id"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ring_img" />
+
+        <TextView
+            android:id="@+id/product_name_c_S_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/product_image_c_S_id"
+            android:fontFamily="@font/opensaucesans_bold"
+            android:text="name"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/product_TExtoprice_c_S_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_name_c_S_id"
+            android:layout_toRightOf="@+id/product_image_c_S_id"
+            android:fontFamily="@font/opensaucesans_regular"
+            android:text="Price:"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/product_oprice_c_S_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_name_c_S_id"
+            android:layout_toRightOf="@+id/product_TExtoprice_c_S_id"
+            android:fontFamily="@font/opensaucesans_regular"
+            android:text="Oprice"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/product_TExtdprice_c_S_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_oprice_c_S_id"
+            android:layout_toRightOf="@+id/product_image_c_S_id"
+            android:fontFamily="@font/opensaucesans_regular"
+            android:text="Discount Price:"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/product_dprice_c_S_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_oprice_c_S_id"
+            android:layout_toRightOf="@+id/product_TExtdprice_c_S_id"
+            android:fontFamily="@font/opensaucesans_regular"
+            android:text="dprice"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/product_TEXTquantity_c_s_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_TExtdprice_c_S_id"
+            android:layout_toRightOf="@+id/product_image_c_S_id"
+            android:fontFamily="@font/opensaucesans_regular"
+            android:text="Quantity:"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/product_quantity_c_s_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_dprice_c_S_id"
+            android:layout_toRightOf="@id/product_TEXTquantity_c_s_id"
+            android:fontFamily="@font/opensaucesans_regular"
+            android:text="12"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/product_TExtdetails_c_S_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_TEXTquantity_c_s_id"
+            android:layout_toRightOf="@+id/product_image_c_S_id"
+            android:fontFamily="@font/opensaucesans_regular"
+            android:text="Details:"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/product_details_c_S_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_quantity_c_s_id"
+            android:layout_toRightOf="@+id/product_TExtdetails_c_S_id"
+            android:fontFamily="@font/opensaucesans_regular"
+            android:text="details"
+            android:textSize="15dp" />
+
+
+        <Button
+            android:id="@+id/product_delete_c_s_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#FF0000"
+            android:drawableLeft="@drawable/ic_baseline_delete_24"
+            android:paddingVertical="10sp"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/product_update_c_s_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:backgroundTint="#2196F3"
+            android:drawableLeft="@drawable/editbtn"
+            android:paddingVertical="10sp"
+            android:text="Update" />
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

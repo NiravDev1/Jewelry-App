@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/Product_id">
+
+        <item android:title="Product">
+            <menu>
+                <item
+                    android:id="@+id/product_list_product_id"
+                    android:icon="@drawable/jewelry"
+                    android:title="Products" />
+
+            </menu>
+
+        </item>
+
+    </group>
+
+
+    <group android:id="@+id/Customer_id">
+        <item android:title="Customer">
+            <menu>
+                <item
+                    android:id="@+id/customer_list_customer_m_id"
+                    android:icon="@drawable/customer"
+                    android:title="Customers" />
+                <item
+                    android:id="@+id/customer_buy_product_m_id"
+                    android:icon="@drawable/shopping_cart"
+                    android:title="buy Product" />
+
+            </menu>
+
+        </item>
+
+    </group>
+
+    <group android:id="@+id/Seller_id">
+        <item android:title="Seller">
+            <menu>
+                <item
+                    android:id="@+id/seller_list_selllers_m_id"
+                    android:icon="@drawable/seller"
+                    android:title="Sellers" />
+                <item
+                    android:id="@+id/seller_new_seller_m_id"
+                    android:icon="@drawable/ic_baseline_person_add_alt_24"
+                    android:title="New Seller" />
+
+                <item
+                    android:id="@+id/seller_notification_m_id"
+                    android:icon="@drawable/notification"
+                    android:title="Seller Request" />
+
+            </menu>
+
+
+        </item>
+
+
+    </group>
+    <item
+        android:id="@+id/Log_out_m_id"
+        android:title="Log out" />
+
+
+</menu>

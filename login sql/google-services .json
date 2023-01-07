@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "442884159543",
+    "firebase_url": "https://jewelry-app-209cb-default-rtdb.firebaseio.com",
+    "project_id": "jewelry-app-209cb",
+    "storage_bucket": "jewelry-app-209cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442884159543:android:b160e44d004232918e67b2",
+        "android_client_info": {
+          "package_name": "com.example.loginsql"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442884159543-0kn75muap5l560ajjocuf2pfen55d2n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKa6xVVZy0veOPOuFZOluwg9FAix1p0uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442884159543-0kn75muap5l560ajjocuf2pfen55d2n7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

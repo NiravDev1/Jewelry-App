@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AuthActivity">
+
+    <ImageView
+        android:id="@+id/auth_admin_logo_id"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/administrator" />
+
+    <TextView
+        android:id="@+id/auth_admin_text_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/auth_admin_logo_id"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/metropolis_bold"
+        android:text="Admin sign in"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/auth_admin_text_id"
+        android:orientation="vertical"
+        android:layout_marginTop="25sp"
+        >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/adminEmail_id"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:hint="Email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/adminPassword_id"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:hint="Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+       <com.google.android.material.button.MaterialButton
+           android:id="@+id/admin_login_btn_id"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Login"
+           android:layout_marginHorizontal="60dp"
+           android:layout_marginTop="10dp"
+           android:paddingVertical="15dp"
+           android:textSize="18dp"
+           app:cornerRadius="5dp"
+           android:textAllCaps="false"
+           />
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

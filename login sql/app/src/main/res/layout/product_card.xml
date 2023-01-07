@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_card_layout_id"
+    android:layout_width="150dp"
+    android:layout_height="200dp"
+    android:layout_margin="10dp"
+    app:cardElevation="10dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/product_img_id"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:padding="5dp"
+            android:src="@drawable/necklace" />
+
+        <TextView
+            android:id="@+id/product_name_id"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/product_img_id"
+            android:fontFamily="@font/opensaucesans_bold"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/product_detail_id"
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:layout_below="@+id/product_name_id"
+            android:text="Product detail" />
+
+        <LinearLayout
+            android:id="@+id/product_price_o_layout_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_detail_id"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/product_d_price_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RS.189"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/product_o_price_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="RS.189"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/product_discount_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="80%"
+                android:textSize="10dp"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_price_o_layout_id"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity:"
+                android:textSize="10dp"
+                />
+            <TextView
+                android:id="@+id/product_quanity_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textSize="11dp"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customer.Fragments.product.ProductShowLayoutActivity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp">
+
+            <ImageView
+                android:id="@+id/product_show_image_id"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="10dp"
+                android:padding="55dp"
+                android:src="@drawable/ring_img" />
+
+            <TextView
+                android:id="@+id/product_show_discout_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_show_image_id"
+                android:fontFamily="@font/opensaucesans_regular"
+                android:text="58%"
+                android:textColor="@color/appicon_app_background"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/product_show_off_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_show_image_id"
+                android:layout_toRightOf="@+id/product_show_discout_id"
+                android:fontFamily="@font/opensaucesans_regular"
+                android:text="off"
+                android:textColor="@color/appicon_app_background"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/product_show_name_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_show_discout_id"
+                android:fontFamily="@font/opensaucesans_bold"
+                android:text="Product Name "
+                android:textSize="22sp" />
+
+
+            <TextView
+                android:id="@+id/MRP_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_show_name_id"
+                android:fontFamily="@font/opensaucesans_bold"
+                android:text="MRP :"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+
+                android:id="@+id/product_show_price_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_show_name_id"
+                android:layout_toRightOf="@+id/MRP_text_id"
+                android:text="19888"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/product_show_discout_price_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_show_name_id"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/product_show_price_id"
+                android:text="20000"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/product_show_qutitity_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_show_price_id"
+                android:text="Qutiity:"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/product_show_qutitity_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_show_price_id"
+                android:layout_toRightOf="@id/product_show_qutitity_text_id"
+                android:text="5"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/product_show_detaile_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_show_qutitity_id"
+                android:fontFamily="@font/opensaucesans_bold"
+                android:text="Product Details: "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/product_show_details_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_show_detaile_text_id"
+                android:layout_marginStart="25dp"
+                android:text="product description "
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/seller_show_product_sellername_TExt_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_show_details_id"
+                android:fontFamily="@font/opensaucesans_bold"
+                android:text="Seller Name: "
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/seller_show_product_sellername_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_show_details_id"
+                android:layout_toRightOf="@id/seller_show_product_sellername_TExt_id"
+                android:fontFamily="@font/opensaucesans_bold"
+                android:text="Seller"
+                android:textSize="20dp"
+                android:textColor="@color/black" />
+
+
+            <Button
+                android:id="@+id/add_to_cart_btn_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="addtocart" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>
