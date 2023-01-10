@@ -52,7 +52,7 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull SellerReqViewholder holder, int position, @NonNull SellerRequestModel model) {
+    protected void onBindViewHolder(@NonNull SellerReqViewholder holder, @SuppressLint("RecyclerView") int position, @NonNull SellerRequestModel model) {
         holder.sellerreqid.setText(model.getSellerRequestId());
         holder.sellername.setText(model.getSellerName());
         holder.selleremail.setText(model.getSellerEmail());
@@ -73,14 +73,24 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
             @Override
             public void onClick(View v) {
 
-                Intent emailintent = new Intent(Intent.ACTION_SEND);
-                emailintent.setType("text/plain");
-                emailintent.putExtra(Intent.EXTRA_EMAIL, new String[]{model.getSellerEmail()});
-                emailintent.putExtra(Intent.EXTRA_SUBJECT, "Become A seller in Jewerly App");
-                emailintent.putExtra(Intent.EXTRA_TEXT, emailmes);
+                try {
+                    FirebaseDatabase.getInstance().getReference().child("Admin").child("SellerRequest").child(getRef(position).getKey()).removeValue();
+                    notifyDataSetChanged();
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
 
-                context.startActivity(Intent.createChooser(emailintent, "Send Email"));
-                Toast.makeText(v.getContext(), "send mail", Toast.LENGTH_SHORT).show();
+//                Intent emailintent = new Intent(Intent.ACTION_SEND);
+//                emailintent.setType("text/plain");
+//                emailintent.putExtra(Intent.EXTRA_EMAIL, new String[]{model.getSellerEmail()});
+//                emailintent.putExtra(Intent.EXTRA_SUBJECT, "Become A seller in Jewerly App");
+//                emailintent.putExtra(Intent.EXTRA_TEXT, emailmes);
+//
+//                context.startActivity(Intent.createChooser(emailintent, "Send Email"));
+//                Toast.makeText(v.getContext(), "send mail", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -125,6 +135,9 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
                                     Toast.makeText(v.getContext(), "database done", Toast.LENGTH_SHORT).show();
                                     sendlinkEmail();
 
+
+
+
                                 } else {
                                     Toast.makeText(v.getContext(), "auth not done", Toast.LENGTH_SHORT).show();
                                 }
@@ -139,6 +152,8 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
                                                 if (task.isSuccessful()) {
                                                     Toast.makeText(v.getContext(), "send email ", Toast.LENGTH_SHORT).show();
                                                     Toast.makeText(v.getContext(), "successfully create Seller", Toast.LENGTH_SHORT).show();
+
+
                                                 } else {
                                                     Toast.makeText(v.getContext(), "some proble with email", Toast.LENGTH_SHORT).show();
                                                 }

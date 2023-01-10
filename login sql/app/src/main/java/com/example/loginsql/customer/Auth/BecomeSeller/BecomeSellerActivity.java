@@ -36,7 +36,6 @@ public class BecomeSellerActivity extends AppCompatActivity {
     RadioGroup sellergender;
     MaterialRadioButton male, female;
     MaterialButton seller_request_btn;
-
     String SellerGender = null;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -92,8 +91,6 @@ public class BecomeSellerActivity extends AppCompatActivity {
                     Toast.makeText(BecomeSellerActivity.this, "Select Gender", Toast.LENGTH_SHORT).show();
                 } else {
 
-
-
                         Query query=databaseReference.child("Admin").child("SellerRequest").orderByChild("SellerEmail").equalTo(SellerEmail);
                                query.addListenerForSingleValueEvent(new ValueEventListener() {
                                    @Override
@@ -131,6 +128,7 @@ public class BecomeSellerActivity extends AppCompatActivity {
                     datetime = localDateTime.format(dateTimeFormatter);
 
                 }
+
 
                 String sellerRequId = databaseReference.child("Admin").child("SEllerRequest").push().getKey();
                 HashMap<String, Object> map = new HashMap<>();
