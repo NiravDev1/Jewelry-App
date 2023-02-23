@@ -4,14 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jewerlyadmin.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,13 +69,16 @@ public class SellerRequestFragment extends Fragment {
 
     RecyclerView sellerRequestlist;
     SellerRequestAdapter sellerRequestAdapter;
-
+    DatabaseReference databaseReference;
+    TextView rcont;
+    long a;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_seller_notification, container, false);
         sellerRequestlist = view.findViewById(R.id.recycler_view_sellerRequest_id);
+        rcont=view.findViewById(R.id.total_request_count_id);
 
         sellerRequestlist.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -76,9 +86,22 @@ public class SellerRequestFragment extends Fragment {
         FirebaseRecyclerOptions<SellerRequestModel> options = new FirebaseRecyclerOptions.Builder<SellerRequestModel>()
                 .setQuery(FirebaseDatabase.getInstance().getReference("Admin").child("SellerRequest"), SellerRequestModel.class)
                 .build();
-        System.out.println(options);
-        sellerRequestAdapter = new SellerRequestAdapter(options,this);
+        databaseReference=FirebaseDatabase.getInstance().getReference("Admin").child("SellerRequest");
+        Query query=databaseReference;
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                a=snapshot.getChildrenCount();
+                rcont.setText(String.valueOf(a));
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        sellerRequestAdapter = new SellerRequestAdapter(options,getActivity());
 
         sellerRequestlist.setAdapter(sellerRequestAdapter);
 

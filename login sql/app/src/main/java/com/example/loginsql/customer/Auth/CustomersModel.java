@@ -1,15 +1,18 @@
 package com.example.loginsql.customer.Auth;
 
 public class CustomersModel {
-    private  String  CustomerId,CustomerName,CustomerMobile,CustomerEmail,CustomerPassword;
+    private  String  CustomerId,CustomerName,CustomerMobile,CustomerEmail,CustomerPassword,CustomerProfile;
 
-    public CustomersModel(String customerId, String customerName, String customerMobile, String customerEmail, String customerPassword) {
+    public CustomersModel(String customerId, String customerName, String customerMobile, String customerEmail, String customerPassword, String customerProfile) {
         CustomerId = customerId;
         CustomerName = customerName;
         CustomerMobile = customerMobile;
         CustomerEmail = customerEmail;
         CustomerPassword = customerPassword;
+        CustomerProfile = customerProfile;
     }
+
+
 
     public CustomersModel() {
     }
@@ -52,5 +55,13 @@ public class CustomersModel {
 
     public void setCustomerPassword(String customerPassword) {
         CustomerPassword = customerPassword;
+    }
+
+    public String getCustomerProfile() {
+        return CustomerProfile;
+    }
+
+    public void setCustomerProfile(String customerProfile) {
+        CustomerProfile = customerProfile;
     }
 }

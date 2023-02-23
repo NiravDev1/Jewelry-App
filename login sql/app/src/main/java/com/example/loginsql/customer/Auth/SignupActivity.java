@@ -1,6 +1,7 @@
 package com.example.loginsql.customer.Auth;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -124,13 +125,22 @@ public class SignupActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+                            String  customerProfile=null;
                             DatabaseReference reference = firebaseDatabase.getReference("User");
                             String customerId = user.getUid();
-                            CustomersModel model = new CustomersModel(customerId, Name, Mobile, Email, Password);
+                            CustomersModel model = new CustomersModel(customerId, Name, Mobile, Email, Password,customerProfile);
                             reference.child("Customer").child(customerId).setValue(model);
                             Toast.makeText(SignupActivity.this, "Sign up successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+//                            directlogin();
+
+                            SharedPreferences preferences=getSharedPreferences("Auth",MODE_PRIVATE);
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putBoolean("flag",true);
+                            editor.apply();
+                            startActivity(new Intent(SignupActivity.this,HomeActivity.class));
+                            finish();
+
+
                         } else {
                             Toast.makeText(SignupActivity.this, "sign up fail", Toast.LENGTH_SHORT).show();
                         }
@@ -151,6 +161,37 @@ public class SignupActivity extends AppCompatActivity {
 
             semail.setError("Entet Vaild Email");
         }
+
+    }
+
+    private void directlogin() {
+
+        mAuth.signInWithEmailAndPassword(semail.getEditText().getText().toString(),spassword.getEditText().getText().toString())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful())
+                        {
+
+                            Toast.makeText(SignupActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(SignupActivity.this, "sign in fails  ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        e.printStackTrace();
+                        Toast.makeText(SignupActivity.this, "Error::"+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+
 
     }
 

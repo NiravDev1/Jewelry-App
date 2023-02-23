@@ -1,7 +1,6 @@
 package com.example.jewerlyadmin.SellerReq;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jewerlyadmin.R;
@@ -23,9 +23,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.Random;
 
@@ -39,10 +44,18 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
      */
     SellerRequestFragment context;
 
-    public SellerRequestAdapter(@NonNull FirebaseRecyclerOptions<SellerRequestModel> options, SellerRequestFragment context) {
+    /**
+     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
+     * {@link FirebaseRecyclerOptions} for configuration options.
+     *
+     * @param options
+     * @param activity
+     */
+    public SellerRequestAdapter(@NonNull FirebaseRecyclerOptions<SellerRequestModel> options, FragmentActivity activity) {
         super(options);
-        this.context = context;
     }
+
+
 
     @NonNull
     @Override
@@ -111,7 +124,7 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
                 holder.sellerReqdown_arrow.setVisibility(View.VISIBLE);
             }
         });
-
+        TextView textView;
         holder.approveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,10 +187,13 @@ public class SellerRequestAdapter extends FirebaseRecyclerAdapter<SellerRequestM
                         });
 
 
+
+
             }
         });
 
     }
+
 
     private static char[] Passwordgenerat(int length) {
 

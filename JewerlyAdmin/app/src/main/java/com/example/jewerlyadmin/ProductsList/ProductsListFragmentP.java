@@ -84,6 +84,7 @@ public class ProductsListFragmentP extends Fragment {
 
 
 
+
         FirebaseRecyclerOptions<ProductModel> options = new FirebaseRecyclerOptions.Builder<ProductModel>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("Products"), ProductModel.class)
                 .build();

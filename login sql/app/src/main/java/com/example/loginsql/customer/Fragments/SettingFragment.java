@@ -10,14 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.loginsql.R;
 import com.example.loginsql.customer.Auth.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,6 +72,7 @@ public class SettingFragment extends Fragment {
 //    }
     Button button;
     TextView userid;
+    FirebaseAuth auth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,16 +83,25 @@ public class SettingFragment extends Fragment {
         button = view.findViewById(R.id.log_out_btn_id);
         userid = view.findViewById(R.id.user_id);
 
+        auth=FirebaseAuth.getInstance();
+        String  uid=auth.getCurrentUser().getUid().toString();
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
 
-        try {
-            userid.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        databaseReference.keepSynced(true);
+        Query query=databaseReference.child("User").child("Customer").child(uid).child("customerName");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userid.setText(snapshot.getValue(String.class));
+            }
 
-        } catch (Exception e) {
-            userid.setText("user");
-            e.printStackTrace();
-            System.out.println(e);
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

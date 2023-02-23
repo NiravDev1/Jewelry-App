@@ -1,19 +1,20 @@
 package com.example.loginsql.customer.Fragments.product;
-
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.example.loginsql.R;
+import com.example.loginsql.customer.Fragments.CartFragment;
 import com.example.loginsql.customer.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,15 +24,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class ProductShowLayoutActivity extends AppCompatActivity {
 
-    TextView PSName, PSDetails, PSPrice, PSDiscout, PSDisPrice, PSQutity,pseller;
+    TextView PSName, PSDetails, PSPrice, PSDiscout, PSDisPrice, PSQutity, pseller;
     ImageView PsImage;
     Button addtocartBTN_id;
+    FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,8 @@ public class ProductShowLayoutActivity extends AppCompatActivity {
         PSQutity = findViewById(R.id.product_show_qutitity_id);
         PsImage = findViewById(R.id.product_show_image_id);
         addtocartBTN_id = findViewById(R.id.add_to_cart_btn_id);
-        pseller=findViewById(R.id.seller_show_product_sellername_id);
-
+        pseller = findViewById(R.id.seller_show_product_sellername_id);
+        frameLayout=findViewById(R.id.fragments_con_id);
         String ProductImage = getIntent().getStringExtra("PImage").toString();
 
         PSPrice.setPaintFlags(PSPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -61,39 +62,69 @@ public class ProductShowLayoutActivity extends AppCompatActivity {
         pseller.setText(getIntent().getStringExtra("pseller"));
 
         Glide.with(PsImage).load(ProductImage).into(PsImage);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Cart");
+
+        String pimage = getIntent().getStringExtra("PImage");
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String CustomerId = user.getUid();
+        Map<String, Object> map = new HashMap<>();
+        map.put("CustomerId", CustomerId);
+        map.put("ProductName", PSName.getText().toString());
+        map.put("ProductImage", pimage);
+        map.put("productDiscoutPrice", PSDisPrice.getText().toString());
+
+        DatabaseReference pro = databaseReference.child(CustomerId);
+
+
+        Query chck = pro.orderByChild("ProductName").equalTo(PSName.getText().toString());
+
+        chck.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+
+
+                    addtocartBTN_id.setText("Go to Cart");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ProductShowLayoutActivity.this, "Error::" + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         addtocartBTN_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String pimage = getIntent().getStringExtra("PImage");
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Cart");
-
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String CustomerId=user.getUid();
-                Map<String, Object> map = new HashMap<>();
-                map.put("CustomerId",CustomerId);
-                map.put("ProductName", PSName.getText().toString());
-                map.put("ProductImage", pimage);
-                map.put("productDiscoutPrice", PSDisPrice.getText().toString());
-
-                DatabaseReference pro = databaseReference.child(CustomerId);
-
-
-                Query chck = pro.orderByChild("ProductName").equalTo(PSName.getText().toString());
-
                 chck.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
-
                             Toast.makeText(ProductShowLayoutActivity.this, "this product already in cart ", Toast.LENGTH_SHORT).show();
-                            addtocartBTN_id.setText("gotocart");
+                            addtocartBTN_id.setText("Add To Cart");
+//                            FragmentManager fragmentManager = getSupportFragmentManager();
+//                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//                            fragmentTransaction.add(R.id.fragments_con_id, new CartFragment());
+//                            fragmentTransaction.addToBackStack(null);
+//
+//                           fragmentTransaction.commit();
+                            frameLayout.setVisibility(View.VISIBLE);
+                            AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
+                            appCompatActivity.getSupportFragmentManager().beginTransaction().add(R.id.fragments_con_id,new CartFragment()).commit();
+
+
                         } else {
 
                             databaseReference.child(CustomerId).push().setValue(map);
                             Toast.makeText(ProductShowLayoutActivity.this, "Successfull add Product", Toast.LENGTH_SHORT).show();
-                            addtocartBTN_id.setText("gotocart");
+                            addtocartBTN_id.setText("Go to Cart");
+
+
                         }
                     }
 

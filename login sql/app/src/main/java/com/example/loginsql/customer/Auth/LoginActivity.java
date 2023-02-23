@@ -104,7 +104,11 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("auth", "auth signin successfull");
+
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+
+
 
                         } else {
                             Toast.makeText(LoginActivity.this, "Email and Password Wrong ", Toast.LENGTH_SHORT).show();

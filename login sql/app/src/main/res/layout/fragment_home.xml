@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/R.id.home_fragments_id"
     tools:context=".customer.Fragments.HomeFragment">
 
     <ScrollView
@@ -18,18 +19,33 @@
             android:background="@color/bg_color"
             android:orientation="vertical">
 
-
-            <androidx.appcompat.widget.SearchView
-
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="@drawable/search_"
-                android:elevation="20dp"
-                android:queryBackground="@android:color/transparent"
-                app:iconifiedByDefault="false"
-                app:queryBackground="@android:color/transparent"
-                app:queryHint="Search" />
+                android:layout_margin="10dp">
+
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/home_serarchview_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/search_"
+                    android:elevation="20dp"
+                    android:queryBackground="@android:color/transparent"
+                    app:iconifiedByDefault="false"
+                    app:queryBackground="@android:color/transparent"
+                    app:queryHint="Search" />
+
+                <ImageView
+                    android:id="@+id/notification_btn_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/home_serarchview_id"
+                    android:src="@drawable/baseline_notifications_none_24" />
+
+
+            </RelativeLayout>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/diwali_card_view"
@@ -80,9 +96,9 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/category_text_id"
-                    android:layout_below="@id/botton_navigaation_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/botton_navigaation_id"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/roboto_regular"
@@ -94,18 +110,18 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/group_recycle_id"
                     android:layout_width="match_parent"
-                    android:layout_below="@id/category_text_id"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/category_text_id"
                     android:scrollbars="none"
                     tools:itemCount="1"
                     tools:listitem="@layout/group_card" />
 
 
                 <com.google.android.material.textview.MaterialTextView
-                   android:id="@+id/product_text_id"
-                    android:layout_below="@id/group_recycle_id"
+                    android:id="@+id/product_text_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/group_recycle_id"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Product"
@@ -115,14 +131,12 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/product_recyclerview_id"
-                    android:layout_below="@id/product_text_id"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
+                    android:layout_below="@id/product_text_id"
                     android:scrollbars="vertical"
                     tools:itemCount="1"
                     tools:listitem="@layout/product_card" />
-
 
 
             </RelativeLayout>

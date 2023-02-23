@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/product_card_layout_id"
     android:layout_width="150dp"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:cardElevation="10dp">
+    app:cardElevation="10dp"
+   >
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -14,8 +16,9 @@
 
         <ImageView
             android:id="@+id/product_img_id"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
             android:padding="5dp"
             android:src="@drawable/necklace" />
 
@@ -58,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="RS.189"
-                android:textSize="10dp" />
+                android:textSize="10dp"
+                tools:ignore="TextSizeCheck" />
 
             <TextView
                 android:id="@+id/product_discount_id"
@@ -91,6 +95,8 @@
                 />
 
         </LinearLayout>
+
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

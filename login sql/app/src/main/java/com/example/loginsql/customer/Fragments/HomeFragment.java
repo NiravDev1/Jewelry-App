@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +19,7 @@ import com.example.loginsql.customer.Fragments.product.ProductAdapter;
 import com.example.loginsql.customer.Fragments.product.ProductModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -73,7 +76,7 @@ public class HomeFragment extends Fragment {
     RecyclerView grecyclerView, pro_recycleView;
     FirebaseAuth firebaseAuth;
     ProductAdapter productAdapter;
-
+        ImageView notificationBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,10 +92,25 @@ public class HomeFragment extends Fragment {
 
         pro_recycleView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
+        notificationBtn=view.findViewById(R.id.notification_btn_id);
+
+        notificationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+
+            NotificationFragment fragment=new NotificationFragment();
+            getFragmentManager().beginTransaction().replace(android.R.id.content,fragment).commit();
+            }
+        });
+
+
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("Products");
+        databaseReference.keepSynced(true);
 
         FirebaseRecyclerOptions<ProductModel> options =
                 new FirebaseRecyclerOptions.Builder<ProductModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Products"), ProductModel.class)
+                        .setQuery(databaseReference, ProductModel.class)
                         .build();
 
 

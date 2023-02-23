@@ -3,16 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/show_product_contener_id"
+    android:orientation="vertical"
     tools:context=".customer.Fragments.product.ProductShowLayoutActivity">
+
+    <FrameLayout
+        android:id="@+id/fragments_con_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp">
+
 
             <ImageView
                 android:id="@+id/product_show_image_id"
@@ -148,7 +160,7 @@
                 android:id="@+id/add_to_cart_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_below="@id/seller_show_product_sellername_id"
                 android:text="addtocart" />
 
 

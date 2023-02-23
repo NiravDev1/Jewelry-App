@@ -3,19 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".customer.Fragments.SettingFragment">
 
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:background="@color/white"
-       >
+       tools:ignore="UselessParent">
+
+       <de.hdodenhof.circleimageview.CircleImageView
+           android:id="@+id/profile_image"
+           android:layout_width="96dp"
+           android:layout_height="96dp"
+           app:civ_border_width="2dp"
+           android:layout_marginTop="30dp"
+           android:src="@drawable/admin_logo"
+           android:layout_centerHorizontal="true"
+           app:civ_circle_background_color="@color/black"
+           app:civ_border_color="#FF000000"/>
+
+
        <TextView
            android:id="@+id/user_id"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="user"
+           android:layout_below="@id/profile_image"
            android:layout_centerHorizontal="true"
            android:gravity="center"
            android:textSize="25sp"
@@ -23,20 +36,15 @@
            android:layout_marginTop="25sp"
            />
 
-
-
-
-
-
        <Button
            android:id="@+id/log_out_btn_id"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="Log out"
-           android:textSize="20dp"
            android:layout_alignParentBottom="true"
            android:layout_centerHorizontal="true"
-           />
+           android:text="Log out"
+           android:textSize="20sp"
+           tools:ignore="TextSizeCheck" />
 
 
 
