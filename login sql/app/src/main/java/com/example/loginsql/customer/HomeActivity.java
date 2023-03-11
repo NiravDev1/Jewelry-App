@@ -26,10 +26,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        SharedPreferences preferences=getSharedPreferences("Auth",MODE_PRIVATE);
-        SharedPreferences.Editor editor=preferences.edit();
-        editor.putBoolean("flag",true);
+        SharedPreferences preferences = getSharedPreferences("Auth", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("flag", true);
         editor.apply();
+
         frameLayout = findViewById(R.id.fragment_view_id);
         bottomNavigationView = findViewById(R.id.botton_navigaation_id);
 

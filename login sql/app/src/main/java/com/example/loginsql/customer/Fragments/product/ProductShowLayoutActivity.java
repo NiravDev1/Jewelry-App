@@ -77,7 +77,7 @@ public class ProductShowLayoutActivity extends AppCompatActivity {
 
         DatabaseReference pro = databaseReference.child(CustomerId);
 
-
+        pro.keepSynced(true);
         Query chck = pro.orderByChild("ProductName").equalTo(PSName.getText().toString());
 
         chck.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -112,10 +112,11 @@ public class ProductShowLayoutActivity extends AppCompatActivity {
 //                            fragmentTransaction.add(R.id.fragments_con_id, new CartFragment());
 //                            fragmentTransaction.addToBackStack(null);
 //
-//                           fragmentTransaction.commit();
+
                             frameLayout.setVisibility(View.VISIBLE);
                             AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
                             appCompatActivity.getSupportFragmentManager().beginTransaction().add(R.id.fragments_con_id,new CartFragment()).commit();
+//                            getSupportFragmentManager().beginTransaction().add(R.id.fragment_view_id,new CartFragment()).commit();
 
 
                         } else {
